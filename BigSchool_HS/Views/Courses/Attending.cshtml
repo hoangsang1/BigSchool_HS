@@ -1,7 +1,11 @@
-﻿@model BigSchool_HS.Models.ViewModels.CourseViewModel
+﻿
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Attending";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<h2>Attending</h2>
+
 <ul class="course">
     @foreach (var course in Model.UpcommingCourses)
     {
@@ -23,7 +27,7 @@
                     }
                 </span>
                 <span class="category">
-                    @course.Category.Name
+                    @course.Category.name
                     @if (Model.ShowAction)
                     {
                         <button data-course-id="@course.Id" class=" btn btn-link btn-sm js-toggle-attendance">Going?</button>
@@ -31,7 +35,9 @@
                 </span>
                 <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
             </div>
-</li>
+        </li>
+    }
+</ul>
 @section scripts
 {
     <script>

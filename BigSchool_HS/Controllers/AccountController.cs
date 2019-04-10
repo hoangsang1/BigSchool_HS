@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BigSchool_HS.Models;
+using System.Data.Entity;
 
 namespace BigSchool_HS.Controllers
 {
@@ -151,7 +152,7 @@ namespace BigSchool_HS.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,Name = Model.Name };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -479,6 +480,11 @@ namespace BigSchool_HS.Controllers
                 }
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
+        }
+
+        private class Model
+        {
+            public static string Name { get; internal set; }
         }
         #endregion
     }
