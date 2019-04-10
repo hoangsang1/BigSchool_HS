@@ -21,14 +21,14 @@ namespace BigSchool_HS.Controllers
         public IHttpActionResult Follow(FollowingDto followingDto)
         {
             var userId = User.Identity.GetUserId();
-            //if (_dbContext.Follwings.Any(f => f.FollowerId == userId && f.FolloweeId == followingDto.FolloweeId))
+            if (_dbContext.Follwings.Any(f => f.FollowerId == userId && f.FolloweeId == followingDto.FolloweeId))
                 return BadRequest("Following already exists!");
             var folowing = new Following
             {
                 FollowerId = userId,
                 FolloweeId = followingDto.FolloweeId
             };
-            //_dbContext.Follwings.Add(folowing);
+            _dbContext.Follwings.Add(folowing);
             _dbContext.SaveChanges();
             return Ok();
         }
